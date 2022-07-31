@@ -1,58 +1,22 @@
 package io.github.ViniciusSantos01.Repository;
 
-import io.github.ViniciusSantos01.domain.entity.Client;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+import io.github.ViniciusSantos01.entity.Client;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-@Repository
-public class Clients {
 
-    @Autowired
-    private EntityManager entityManager;
+public interface Clients extends JpaRepository<Client, Integer> {
 
-    @Transactional
-    public Client save(Client client){
-        entityManager.persist(client);
-        return client;
-    }
+    @Query(value = " select * from client c where c.name like '%:name%'", nativeQuery = true)
+    List<Client> findByName(@Param("name") String name);
 
-    @Transactional
-    public Client update(Client client) {
-        entityManager.merge(client);
-        return client;
-    }
+    @Query(" delete from Client c where c.name =:name ")
+    @Modifying
+    void deleteByName (String name);
 
-    @Transactional
-    public void delete(Client client){
-        if (!entityManager.contains(client)) {
-            client = entityManager.merge(client);
-        }
-        entityManager.remove(client);
-    }
-    @Transactional
-    public void delete(Integer id){
-        Client client = entityManager.find(Client.class, id);
-        delete(client);
-    }
-
-    @Transactional
-    public List<Client> searchByName(String name){
-        String jpql = " select c from Client c where c.name like :name ";
-        TypedQuery<Client> query = entityManager.createQuery(jpql, Client.class);
-        query.setParameter("name", "%" + name + "%");
-        return query.getResultList();
-    }
-
-    @Transactional
-    public List<Client> getAll(){
-        return entityManager.createQuery("from Client", Client.class).getResultList();
-    }
-
+    boolean existsByName (String name);
 }

@@ -1,6 +1,7 @@
-package io.github.ViniciusSantos01.domain.entity;
+package io.github.ViniciusSantos01.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -13,7 +14,17 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
+    @OneToMany(mappedBy = "client")
+    private Set<ClientOrder> orders;
     public Client() {
+    }
+
+    public Set<ClientOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<ClientOrder> orders) {
+        this.orders = orders;
     }
 
     public Client(Integer id, String name) {

@@ -1,10 +1,22 @@
-package io.github.ViniciusSantos01.domain.entity;
+package io.github.ViniciusSantos01.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ITEM_client_Order")
 public class ItemClientOrder {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
     private ClientOrder clientOrder;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
+    @Column
     private Integer quantity;
 
     public Integer getId() {

@@ -1,14 +1,37 @@
-package io.github.ViniciusSantos01.domain.entity;
+package io.github.ViniciusSantos01.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
+@Table(name = "client_Order")
 public class ClientOrder {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
+
+    @Column(name = "orderDate")
     private LocalDate orderDate;
+    @Column(name = "total", length = 20, precision = 2)
     private BigDecimal total;
+
+    @OneToMany(mappedBy = "clientOrder")
+    private List<ItemClientOrder> itens;
+
+    public List<ItemClientOrder> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemClientOrder> itens) {
+        this.itens = itens;
+    }
 
     public Integer getId() {
         return id;
