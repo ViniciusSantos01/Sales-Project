@@ -1,5 +1,7 @@
 package io.github.ViniciusSantos01.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +16,10 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
+    @Column(name = "documentNumber", length = 9)
+    private String documentNumber;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<ClientOrder> orders;
     public Client() {
@@ -50,6 +56,14 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
 
     @Override
