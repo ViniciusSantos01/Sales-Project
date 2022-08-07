@@ -1,10 +1,17 @@
 package io.github.ViniciusSantos01.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "client_Order")
 public class ClientOrder {
@@ -23,54 +30,6 @@ public class ClientOrder {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "clientOrder")
-    private List<ItemClientOrder> itens;
+    private List<ItemClientOrder> items;
 
-    public List<ItemClientOrder> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<ItemClientOrder> itens) {
-        this.itens = itens;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public LocalDate getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    @Override
-    public String toString() {
-        return "ClientOrder{" +
-                "id=" + id +
-                ", orderDate=" + orderDate +
-                ", total=" + total +
-                '}';
-    }
 }

@@ -1,8 +1,13 @@
 package io.github.ViniciusSantos01.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -16,28 +21,4 @@ public class Product {
     @Column(name = "UNITY_PRICE")
     private BigDecimal UNITY_PRICE;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getPrice() {
-        return UNITY_PRICE;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.UNITY_PRICE = price;
-    }
 }

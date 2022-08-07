@@ -1,7 +1,14 @@
 package io.github.ViniciusSantos01.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ITEM_client_Order")
 public class ItemClientOrder {
@@ -19,35 +26,4 @@ public class ItemClientOrder {
     @Column
     private Integer quantity;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public ClientOrder getClientOrder() {
-        return clientOrder;
-    }
-
-    public void setClientOrder(ClientOrder clientOrder) {
-        this.clientOrder = clientOrder;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }
