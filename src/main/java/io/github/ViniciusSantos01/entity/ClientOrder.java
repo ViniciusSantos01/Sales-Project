@@ -1,5 +1,6 @@
 package io.github.ViniciusSantos01.entity;
 
+import io.github.ViniciusSantos01.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,10 @@ public class ClientOrder {
     private LocalDate orderDate;
     @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OrderStatus status;
 
     @OneToMany(mappedBy = "clientOrder")
     private List<ItemClientOrder> items;
