@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
@@ -20,9 +21,11 @@ public class Client {
     @Column(name = "id")
     private Integer id;
     @Column(name = "name", length = 100)
+    @NotEmpty(message = "{field.name.required}")
     private String name;
 
     @Column(name = "documentNumber", length = 9)
+    @NotEmpty(message = "{field.document.required}")
     private String documentNumber;
 
     @JsonIgnore

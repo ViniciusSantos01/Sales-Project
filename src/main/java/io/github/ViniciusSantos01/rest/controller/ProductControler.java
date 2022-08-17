@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class ProductControler {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product save(@RequestBody Product product){
+    public Product save(@RequestBody @Valid Product product){
         return products.save(product);
     }
 
@@ -51,7 +52,7 @@ public class ProductControler {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id,
-                       @RequestBody Product product){
+                       @RequestBody @Valid Product product){
         products
                 .findById(id)
                 .map(existProduct ->{
