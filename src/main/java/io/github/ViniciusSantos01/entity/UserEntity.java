@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 @Entity
 @Table(name = "User")
-public class UserEntiry {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
