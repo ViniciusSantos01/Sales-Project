@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "User")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer id;
 
