@@ -2,6 +2,7 @@ package io.github.ViniciusSantos01.rest.controller;
 
 import io.github.ViniciusSantos01.Repository.Clients;
 import io.github.ViniciusSantos01.entity.Client;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clients")
+@Api("Api Clients")
 public class ClientController {
 
     private Clients clients;
@@ -22,7 +24,13 @@ public class ClientController {
     }
 
     @GetMapping("{id}")
-    public Client getClientById(@PathVariable Integer id){
+    @ApiOperation("Get details from one client")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Client found"),
+            @ApiResponse(code = 404, message = "Client not found for this ID")
+    })
+    public Client getClientById(@PathVariable
+                                    @ApiParam("Client ID") Integer id){
 
         return clients.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
@@ -31,6 +39,11 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Save new client")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Client saved with success"),
+            @ApiResponse(code = 404, message = "Validation error")
+    })
     public Client save(@RequestBody @Valid Client client){
         return clients.save(client);
     }
